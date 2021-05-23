@@ -32,27 +32,51 @@ class LinkedList(object):
         Return "None" if position is not in the list."""
         iter=1
         current=self.head
-        if(position==None):
-            
-        while(current and iter<position):
-            if(current.next):
-                current=current.next
-                iter+=1
-            else:
-                return None
-        return current
+        if(position<1):
+            return None
+        while(current and iter<=position):
+            if (iter==position):
+                return current 
+            current=current.next
+            iter+=1
+        return None
     
     def insert(self, new_element, position):
         """Insert a new node at the given position.
         Assume the first position is "1".
         Inserting at position 3 means between
         the 2nd and 3rd elements."""
-        pass
-    
-    
+        iter=1
+        current=self.head
+        while(current and iter<=position):
+            if(iter==1 and iter==position):
+                new_element.next=self.head
+                self.head=new_element
+            if(iter==(position-1)):
+                temp=current.next
+                current.next=new_element
+            if(iter==position and iter!=1):
+                new_element.next=temp
+            current=current.next
+            iter+=1
+
+
+
     def delete(self, value):
         """Delete the first node with a given value."""
-        pass
+        current=self.head
+        iter=1
+        while(current and iter):
+            if((iter==1) and (current.value==value)):
+                self.head=current.next
+            if(current.value==value):
+                temp=current.next
+                current=temp
+            iter+=1
+            current=current.next
+        #print (self.head.value)
+        #print 'adf'
+
 
 # Test cases
 # Set up some Elements
@@ -85,3 +109,4 @@ print ll.get_position(1).value
 print ll.get_position(2).value
 # Should print 3 now
 print ll.get_position(3).value
+
